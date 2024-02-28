@@ -1,39 +1,87 @@
+<!-- index.html -->
+
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Your Side Navbar</title>
+  <link rel="stylesheet" href="navbar.css">
+</head>
+<body>
+
+<div id="sidebar">
+  <a href="javascript:void(0);" onclick="openTab('initiative-map')">Initiative Map</a>
+  <a href="javascript:void(0);" onclick="openTab('sustainable-village')">Sustainable Village</a>
+  <a href="javascript:void(0);" onclick="openTab('view-other-villages')">View other villages</a>
+  <a href="javascript:void(0);" onclick="openTab('leaderboard')">Leaderboard</a>
+  <a href="javascript:void(0);" onclick="openTab('shop')">Shop</a>
+  <a href="javascript:void(0);" onclick="openTab('settings')">Settings</a>
+  <a href="javascript:void(0);" onclick="openTab('logout')">Log Out</a>
+</div>
+
+<div id="content">
+  <div id="sustainable-village" class="tabcontent">
+    <div id="fullScreenImageContainer">
+      <!-- Content for Sustainable Village -->
+    </div>
+  </div>
+  <div id="shop" class="tabcontent">
+    <div class="shop-container">
+      <div class="shop-item">
+        <img src="img/tree1.png" alt="Product 1">
+        <p>Price: 600 e-Points</p>
+      </div>
+      <div class="shop-item">
+        <img src="img/tree2.png" alt="Product 2">
+        <p>Price: 800 e-Points</p>
+      </div>
+      <div class="shop-item">
+        <img src="img/tree3.png" alt="Product 3">
+        <p>Price: 400 e-Points</p>
+      </div>
+      <div class="shop-item">
+        <img src="img/tree4.png" alt="Product 4">
+        <p>Price: 1000 e-Points</p>
+      </div>
+      <div class="shop-item">
+        <img src="img/tree5.png" alt="Product 5">
+        <p>Price: 600 e-Points</p>
+      </div>
+      <div class="shop-item">
+        <img src="img/tree6.png" alt="Product 6">
+        <p>Price: 700 e-Points</p>
+      </div>
+      
+    </div>
+  </div>
+</div>
 
 
-        {% for message in messages %}
-        <div class="start_alert-{{ message.tags }} alert-dismissible fade show" role="alert">
-            <strong>Message : </strong> {{message}}
-            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-            </button>
-        </div>
-        {% endfor %}
+<script>
+  function openTab(tabName) {
+    var i, tabcontent;
+    tabcontent = document.getElementsByClassName("tabcontent");
+    for (i = 0; i < tabcontent.length; i++) {
+      tabcontent[i].style.display = "none";
+    }
 
-        <h3>Welcome to this Login page</h3>
+    if (tabName === 'sustainable-village') {
+    document.getElementById('fullScreenImageContainer').innerHTML = '<img src="img/village.png" alt="Sustainable Village Image">';
+  } else {
+    // For other tabs, fetch and load content from separate HTML files
+    fetch(tabName + '.html')
+      .then(response => response.text())
+      .then(html => {
+        document.getElementById('content').innerHTML = html;
+      })
+      .catch(error => console.error('Error fetching content:', error));
+  }
 
-        {% if user.is_authenticated %}
-        <h3>Hello {{fname}}</h3>
-        <h4>You have successfully logged in</h4>
-        <button type="submit"><a href="/signout">SignOut</a></button>
-        {% else %}
-        <button type="submit"><a href="/signin">SignIn</a></button>
-        <button type="submit"><a href="/signup">SignUp</a></button>
-        {% endif %}
-        <script src="" async defer></script>
-    </body>
+  // Display the selected tab
+  document.getElementById(tabName).style.display = "block";
+}
+</script>
+
+</body>
 </html>
