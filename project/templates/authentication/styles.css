@@ -1,0 +1,65 @@
+body, h1, p {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    transition: background-color 0.5s ease; /* Add a smooth transition effect */
+}
+
+/* Navbar styling */
+.navbar {
+    background-color: #1b9e63;
+    padding: 10px;
+    text-align: center;
+    color: #ffffff;
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); 
+    transition: background-color 0.5s ease, box-shadow 0.5s ease; /* Add smooth transitions */
+}
+
+
+.navbar h1 {
+    margin: 0;
+    font-size: 24px;
+}
+
+/* Day-night toggle styling */
+.day-night-toggle {
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    transition: background-image 0.5s ease; /* Add a smooth transition effect */
+}
+
+
+main {
+    padding: 20px;
+}
+
+
+@media only screen and (max-width: 600px) {
+    /* Adjustments for smaller screens */
+    .navbar {
+        padding: 10px 5px;
+    }
+
+    main {
+        padding: 10px;
+    }
+}
+
+#interactiveMap {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #b7acac;
+}
+
+#mapContainer {
+    
+    height: 400px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
