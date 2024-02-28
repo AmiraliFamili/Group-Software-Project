@@ -111,8 +111,12 @@ body {
 /* Sustainable village page styling -----------------------------------*/
 
 #sustainable-village img {
-  width: 100%;
+  position: fixed;
+  top:0;
+  right: 0;
+  width: 86%;
   height: 100%;
+  object-fit: cover; 
 }
 
 /* shop page styling ------------------------------------------------------*/
