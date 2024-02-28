@@ -24,10 +24,9 @@ SECRET_KEY = "django-insecure-uxdpv%^a=)1xw(=!r9+a$6ymt#vfvo))$etdm0(2f2e7)2a*_%
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
-
 ALLOWED_HOSTS = []
 
-
+APPEND_SLASH=False
 # Application definition
 
 INSTALLED_APPS = [
