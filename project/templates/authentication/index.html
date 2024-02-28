@@ -5,83 +5,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Your Side Navbar</title>
-  <link rel="stylesheet" href="navbar.css">
+  <title>Sustainable Campus App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-
-<div id="sidebar">
-  <a href="javascript:void(0);" onclick="openTab('initiative-map')">Initiative Map</a>
-  <a href="javascript:void(0);" onclick="openTab('sustainable-village')">Sustainable Village</a>
-  <a href="javascript:void(0);" onclick="openTab('view-other-villages')">View other villages</a>
-  <a href="javascript:void(0);" onclick="openTab('leaderboard')">Leaderboard</a>
-  <a href="javascript:void(0);" onclick="openTab('shop')">Shop</a>
-  <a href="javascript:void(0);" onclick="openTab('settings')">Settings</a>
-  <a href="javascript:void(0);" onclick="openTab('logout')">Log Out</a>
-</div>
-
-<div id="content">
-  <div id="sustainable-village" class="tabcontent">
-    <div id="fullScreenImageContainer">
-      <!-- Content for Sustainable Village -->
-    </div>
+  <div id="header">
+    <a id="sign-up" href="#">Sign Up</a>
+    <a id="sign-in" href="#">Sign In</a>
   </div>
-  <div id="shop" class="tabcontent">
-    <div class="shop-container">
-      <div class="shop-item">
-        <img src="img/tree1.png" alt="Product 1">
-        <p>Price: 600 e-Points</p>
-      </div>
-      <div class="shop-item">
-        <img src="img/tree2.png" alt="Product 2">
-        <p>Price: 800 e-Points</p>
-      </div>
-      <div class="shop-item">
-        <img src="img/tree3.png" alt="Product 3">
-        <p>Price: 400 e-Points</p>
-      </div>
-      <div class="shop-item">
-        <img src="img/tree4.png" alt="Product 4">
-        <p>Price: 1000 e-Points</p>
-      </div>
-      <div class="shop-item">
-        <img src="img/tree5.png" alt="Product 5">
-        <p>Price: 600 e-Points</p>
-      </div>
-      <div class="shop-item">
-        <img src="img/tree6.png" alt="Product 6">
-        <p>Price: 700 e-Points</p>
-      </div>
-      
-    </div>
+
+
+  <div id="app-explanation">
+    <h1>NAMEOFAPP</h1>
+    <p>Welcome to our eco-friendly campus adventure!🌱 </p>
+    <p>Join us in promoting sustainability, raising awareness, and sparking positive change. </p>
+    <p>Walk, explore, and earn tokens to build your unique village.</p>
+    <p>Engage with daily trivia, challenge friends, and make a lasting impact. Let's game for a greener world together! </p>
+    <p>Embark on a quest where every step matters! Join a community dedicated to making a difference. Your journey awaits – discover hidden gems, unlock eco-treasures, and be part of a movement. Ready to level up your campus experience? Let the green adventure begin!</p>
+    
   </div>
-</div>
-
-
-<script>
-  function openTab(tabName) {
-    var i, tabcontent;
-    tabcontent = document.getElementsByClassName("tabcontent");
-    for (i = 0; i < tabcontent.length; i++) {
-      tabcontent[i].style.display = "none";
-    }
-
-    if (tabName === 'sustainable-village') {
-    document.getElementById('fullScreenImageContainer').innerHTML = '<img src="img/village.png" alt="Sustainable Village Image">';
-  } else {
-    // For other tabs, fetch and load content from separate HTML files
-    fetch(tabName + '.html')
-      .then(response => response.text())
-      .then(html => {
-        document.getElementById('content').innerHTML = html;
-      })
-      .catch(error => console.error('Error fetching content:', error));
-  }
-
-  // Display the selected tab
-  document.getElementById(tabName).style.display = "block";
-}
-</script>
-
 </body>
 </html>
