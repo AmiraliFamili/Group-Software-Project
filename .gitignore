@@ -1,0 +1,21 @@
+# Visual Studio Code
+.vscode/
+
+# Django
+*.pyc
+__pycache__/
+*.sqlite3
+db.sqlite3
+media/
+
+# Ignore local development settings
+settings_local.py
+
+# Ignore virtual environment
+venv/
+.venv
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
