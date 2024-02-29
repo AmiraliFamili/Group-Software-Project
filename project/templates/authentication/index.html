@@ -1,19 +1,16 @@
-<<<<<<< HEAD
 <!-- index.html -->
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Sustainable Campus App</title>
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="{% static 'project/styles.css' %}">
 </head>
 <body>
-  <div id="header">
-    <a id="sign-up" href="#">Sign Up</a>
-    <a id="sign-in" href="#">Sign In</a>
-  </div>
+  
 
 
   <div id="app-explanation">
@@ -26,26 +23,10 @@
     
   </div>
 </body>
-=======
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
 
 
         {% for message in messages %}
-        <div class="start_alert-{{ message.tags }} alert-dismissible fade show" role="alert">
+        <div class="start_alert-{{ message.tags }} alert-dismissible fade show" role="alert" >
             <strong>Message : </strong> {{message}}
             <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
@@ -61,10 +42,11 @@
         <button type="submit"><a href="/signout">SignOut</a></button>
         <button type="submit"><a href="/map">Interactive Map</a></button>
         {% else %}
-        <button type="submit"><a href="/signin">SignIn</a></button>
-        <button type="submit"><a href="/signup">SignUp</a></button>
+        <div id="header">
+          <button type="submit"id="sign-in"><a href="/signin">SignIn</a></button>
+          <button type="submit" id="sign-up"><a href="/signup">SignUp</a></button> 
+        </div>
         {% endif %}
         <script src="" async defer></script>
     </body>
->>>>>>> 38d2916 (added the map in it's own app)
 </html>
