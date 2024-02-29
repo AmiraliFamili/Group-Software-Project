@@ -8,6 +8,9 @@ from django.contrib.auth import authenticate, login, logout
 def home(request):
     return render(request, "authentication/index.html")
 
+def navbar(request):
+    return render(request, "authentication/navbar.html")
+
 def signup(request): 
     User = get_user_model()
     if request.method == "POST":

@@ -39,6 +39,7 @@
         {% if user.is_authenticated %}
         <h3>Hello {{fname}}</h3>
         <h4>You have successfully logged in</h4>
+        <button type="submit"><a href="/navbar">Proceed to app</a></button>
         <button type="submit"><a href="/signout">SignOut</a></button>
         <button type="submit"><a href="/map">Interactive Map</a></button>
         {% else %}

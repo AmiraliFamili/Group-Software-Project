@@ -1,26 +1,27 @@
 <!-- index.html -->
 
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Your Side Navbar</title>
-  <link rel="stylesheet" href="navbar.css">
+  <link rel="stylesheet" href="{% static 'project/navbar.css' %}">
 </head>
 <body>
 
 <div id="sidebar">
   <a href="javascript:void(0);" onclick="openTab('profile')">USERNAMEHERE</a>
   <span class="sidebar-space"></span>
-  <a href="javascript:void(0);" onclick="openTab('initiative-map')">Initiative Map</a>
+  <a href="javascript:void(0);" onclick="openMap()">Initiative Map</a>
   <a href="javascript:void(0);" onclick="openTab('submit-location-code')">Submit location code</a>
   <a href="javascript:void(0);" onclick="openTab('sustainable-village')">Sustainable Village</a>
   <a href="javascript:void(0);" onclick="openTab('view-other-villages')">View other villages</a>
   <a href="javascript:void(0);" onclick="openTab('leaderboard')">Leaderboard</a>
   <a href="javascript:void(0);" onclick="openTab('shop')">Shop</a>
   <a href="javascript:void(0);" onclick="openTab('settings')">Settings</a>
-  <a href="javascript:void(0);" onclick="openTab('logout')">Log Out</a>
+  <button type="submit"><a href="/signout">SignOut</a></button>
 </div>
 
 <div id="content">
@@ -44,6 +45,10 @@
       .catch(error => console.error('Error fetching content:', error));
 
     document.getElementById(tabName).style.display = "block";
+  }
+
+  function openMap() {
+    window.location.href = "/map";
   }
 </script>
 
