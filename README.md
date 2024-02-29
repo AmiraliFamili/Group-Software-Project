@@ -7,3 +7,5 @@ Root :
 username : admin
 password : admin 
 email : p82039197@gmail.com
+
+REMINDER: Do not commit to main branch. Create a branch name it accordingly and pull request
