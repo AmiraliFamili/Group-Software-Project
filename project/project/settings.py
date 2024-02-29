@@ -26,7 +26,6 @@ SECRET_KEY = "django-insecure-uxdpv%^a=)1xw(=!r9+a$6ymt#vfvo))$etdm0(2f2e7)2a*_%
 DEBUG = True
 ALLOWED_HOSTS = []
 
-APPEND_SLASH=False
 # Application definition
 
 INSTALLED_APPS = [
@@ -36,6 +35,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "map"
     "login",
     "game",
 ]
