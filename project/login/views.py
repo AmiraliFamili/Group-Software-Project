@@ -41,13 +41,11 @@ def signup(request):
 
             """
         
-       
+    
         account = User.objects.create_user(username, email, password)
         account.first_name = fname
         account.last_name = lname
-        
         account.save()
-        
         
         messages.success(request, "Your Account Is Now Created. Please sign in to continue.")
         
