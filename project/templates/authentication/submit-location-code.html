@@ -14,46 +14,31 @@
 
     <h1>Submit Location Code</h1>
 
-    <form action="#" onsubmit="return validateForm()">
-        <label for="alphanumericInput">Enter 6-digit code:</label>
-        <input type="text" id="alphanumericInput" name="alphanumericInput" required>
+
+    {% if messages %}
+    <div class="messages">
+        {% for message in messages %}
+        <div class="alert alert-{{ message.tags }}">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
+
+    <form method="post" onsubmit="displayNewItem();">
+        {% csrf_token %}
+        <label for="{{ form.code.id_for_label }}">Enter 6-digit code:</label>
+        <input type="text" id="{{ form.code.id_for_label }}" name="{{ form.code.html_name }}" required>
         <br>
         <input type="submit" value="Submit">
     </form>
 
-    <script>
-        function validateForm() {
-            var input = document.getElementById('alphanumericInput').value;
-
-            // Check if the input is exactly 6 alphanumeric characters
-            if (!/^[a-zA-Z0-9]{6}$/.test(input)) {
-                alert('Please enter 6 alphanumeric characters.');
-                return false;
-            }
-
-            return true;
-        }
-
-        function displayNewItem(imageSource) {
-            var itemUnlockedDiv = document.getElementById('itemUnlocked');
-
-            // Check if there's an existing image
-            var existingImage = itemUnlockedDiv.querySelector('img');
-            if (existingImage) {
-                // If an image exists, remove it
-                existingImage.remove();
-            }
-
-            // Create image for unlocked item
-            var img = document.createElement('img');
-            img.src = imageSource;
-            img.alt = 'New Object';
-
-            itemUnlockedDiv.insertBefore(img, itemUnlockedDiv.firstChild); // adding img to start of div
-
-            itemUnlockedDiv.style.display = 'block'; // making div visible
-        }
-    </script>
+    {% if item %}
+    <h2>You've received a new item!</h2>
+    <p>{{ item.name }}</p>
+    <img src="{{ item.image.url }}" alt="{{ item.name }}">
+    {% endif %}
 
     <div id="itemUnlocked">
         <br>
