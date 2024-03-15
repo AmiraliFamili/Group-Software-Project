@@ -33,7 +33,6 @@ def map(request):
    
    return render(request, 'map/mappage.html', context)
 
-
 def code_entry(request):
     if request.method == "POST":
         form = CodeForm(request.POST)
@@ -68,4 +67,3 @@ def code_entry(request):
     else: 
         form = CodeForm()
         return render(request, "authentication/submit-location-code.html", {"form": form})
-

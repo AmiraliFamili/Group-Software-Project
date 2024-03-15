@@ -4,10 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Location Code</title>
+    <style>
+        #itemUnlocked {
+            display: none; /* Initially hide the div */
+        }
+    </style>
 </head>
 <body>
 
     <h1>Submit Location Code</h1>
+
 
     {% if messages %}
     <div class="messages">
@@ -33,6 +39,11 @@
     <p>{{ item.name }}</p>
     <img src="{{ item.image.url }}" alt="{{ item.name }}">
     {% endif %}
+
+    <div id="itemUnlocked">
+        <br>
+        <a>New item unlocked! Find it in your inventory!</a>
+    </div>
 
 </body>
 </html>
