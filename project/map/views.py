@@ -30,3 +30,5 @@ def map(request):
    
    return render(request, 'map/mappage.html', context)
 
+def code_entry(request):
+   return render(request, "authentication/submit-location-code.html")

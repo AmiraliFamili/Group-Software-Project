@@ -4,12 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Location Code</title>
+    <style>
+        #itemUnlocked {
+            display: none; /* Initially hide the div */
+        }
+    </style>
 </head>
 <body>
 
     <h1>Submit Location Code</h1>
 
-    <form action="#" method="post" onsubmit="return validateForm()">
+    <form action="#" onsubmit="return validateForm()">
         <label for="alphanumericInput">Enter 6-digit code:</label>
         <input type="text" id="alphanumericInput" name="alphanumericInput" required>
         <br>
@@ -28,7 +33,32 @@
 
             return true;
         }
+
+        function displayNewItem(imageSource) {
+            var itemUnlockedDiv = document.getElementById('itemUnlocked');
+
+            // Check if there's an existing image
+            var existingImage = itemUnlockedDiv.querySelector('img');
+            if (existingImage) {
+                // If an image exists, remove it
+                existingImage.remove();
+            }
+
+            // Create image for unlocked item
+            var img = document.createElement('img');
+            img.src = imageSource;
+            img.alt = 'New Object';
+
+            itemUnlockedDiv.insertBefore(img, itemUnlockedDiv.firstChild); // adding img to start of div
+
+            itemUnlockedDiv.style.display = 'block'; // making div visible
+        }
     </script>
+
+    <div id="itemUnlocked">
+        <br>
+        <a>New item unlocked! Find it in your inventory!</a>
+    </div>
 
 </body>
 </html>
