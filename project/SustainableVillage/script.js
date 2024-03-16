@@ -18,6 +18,28 @@ canvas.height = cols * tileHeight;
 const offsetX = (canvas.width - (rows * tileWidth)) / 2;
 const offsetY = (canvas.height - (cols * tileHeight)) / 2;
 
+// Function to create a new object
+function createObject(imageSrc, initialX, initialY, width, height) {
+    return {
+        image: createImage(imageSrc),
+        x: initialX,
+        y: initialY,
+        width: width,
+        height: height,
+        isMoving: false // Added this property to track if the object is moving
+    };
+}
+
+function createImage(src) {
+    const image = new Image();
+    image.onload = function() {
+        drawScene(); // Redraw the scene once the image is loaded
+    };
+    image.src = src;
+    return image;
+}
+
+
 // Function to draw the scene
 function drawScene() {
     // Clear the canvas
@@ -36,19 +58,23 @@ function drawScene() {
         }
     }
 
-    // Draw the image
-    ctx.drawImage(image, imageX, imageY, imageWidth, imageHeight);
+    // Draw each object
+    objects.forEach(object => {
+        ctx.drawImage(object.image, object.x, object.y, object.width, object.height);
+    });
 
-    // Draw the red dot if the image is movable
-    if (isMoving) {
-        const centerX = imageX + imageWidth / 2;
-        const centerY = imageY + imageHeight;
-        const dotSize = 5;
-        ctx.fillStyle = 'red';
-        ctx.beginPath();
-        ctx.arc(centerX, centerY, dotSize, 0, 2 * Math.PI);
-        ctx.fill();
-    }
+    // Draw the red dot if an object is movable
+    objects.forEach(object => {
+        if (object.isMoving) {
+            const centerX = object.x + object.width / 2;
+            const centerY = object.y + object.height;
+            const dotSize = 5;
+            ctx.fillStyle = 'red';
+            ctx.beginPath();
+            ctx.arc(centerX, centerY, dotSize, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+    });
 }
 
 // Draw isometric tile
@@ -63,66 +89,58 @@ function drawIsometricTile(x, y, width, height) {
     ctx.stroke();
 }
 
-// Image properties
-const imageWidth = 100;
-const imageHeight = 100;
-let imageX = canvas.width / 2 - imageWidth / 2; // Initial position of the image
-let imageY = canvas.height / 2 - imageHeight / 2;
+// Array to hold objects
+const objects = [];
 
-// Red dot properties (relative to the original image position)
-const dotOffsetX = imageWidth / 2;
-const dotOffsetY = imageHeight;
+// Add objects
+objects.push(createObject('images/hut.png', canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100));
+objects.push(createObject('images/villagehalltrp.png', canvas.width / 2 - 50, canvas.height / 2 - 50, 100, 100));
 
-// Image
-const image = new Image();
-image.src = 'images/hut.png'; // Replace 'image.jpg' with the path to your image
 
-// Flag to determine if image movement is enabled
-let isMoving = false;
-
-// Mouse event listeners for the image
+// Mouse event listener for the objects
 canvas.addEventListener('mousedown', function (e) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
-    if (mouseX >= imageX && mouseX <= imageX + imageWidth && mouseY >= imageY && mouseY <= imageY + imageHeight) {
-        isMoving = true;
-    }
+    objects.forEach(object => {
+        console.log("object (x,y) =", object.x, object.y, "mouse (x,y) =", mouseX, mouseY);
+        if (mouseX >= object.x && mouseX <= object.x + object.width && mouseY >= object.y && mouseY <= object.y + object.height) {
+            // Reset all other objects' moving state
+            objects.forEach(otherObject => {
+                otherObject.isMoving = false;
+            });
+            // Set the clicked object's moving state to true
+            object.isMoving = true;
+            // Draw the scene after setting the moving state
+            drawScene();
+        }
+    });
 });
 
 
 
-// Handle arrow key presses to move the image when it's clicked
+// Handle arrow key presses to move the objects
 document.addEventListener('keydown', function (e) {
-    if (!isMoving && e.key === 'Enter') {
-        isMoving = true;
-    } else if (isMoving && e.key === 'Enter') {
-        isMoving = false;
-    }
-});
-
-// Handle arrow key presses to move the image
-document.addEventListener('keydown', function (e) {
-    if (!isMoving) return;
-    switch (e.key) {
-        case 'ArrowLeft':
-            imageX -= tileWidth / 2;
-            break;
-        case 'ArrowRight':
-            imageX += tileWidth / 2;
-            break;
-        case 'ArrowUp':
-            imageY -= tileHeight / 2;
-            break;
-        case 'ArrowDown':
-            imageY += tileHeight / 2;
-            break;
-    }
+    objects.forEach(object => {
+        if (object.isMoving) {
+            switch (e.key) {
+                case 'ArrowLeft':
+                    object.x -= tileWidth;
+                    break;
+                case 'ArrowRight':
+                    object.x += tileWidth;
+                    break;
+                case 'ArrowUp':
+                    object.y -= tileHeight;
+                    break;
+                case 'ArrowDown':
+                    object.y += tileHeight;
+                    break;
+            }
+        }
+    });
     drawScene();
 });
 
 // Initial draw
-image.onload = function () {
-    drawScene();
-};
-
+drawScene();
