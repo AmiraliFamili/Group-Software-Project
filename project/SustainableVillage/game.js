@@ -7,8 +7,8 @@ mapImage.src = 'clash.webp'; // Replace 'clash.webp' with the path to your map i
 
 // Object images
 const objectImages = [
-    'Hut.png',
-    'Tree.png'
+    'images/Hut.png',
+    'images/palmtreetrp.png'
 ];
 
 // Map properties
