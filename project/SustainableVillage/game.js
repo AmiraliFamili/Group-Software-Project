@@ -30,8 +30,8 @@ let gridRotation = Math.PI / 4; // Grid rotation angle in radians
 
 // Object properties
 let objects = [
-    { x: 50, y: 50, imageIndex: 0 },
-    { x: 200, y: 200, imageIndex: 1 }
+    { x: 500, y: 500, imageIndex: 0 },
+    { x: 400, y: 400, imageIndex: 0 }
 ];
 
 // Flag to track if object dragging is in progress
@@ -70,10 +70,82 @@ function drawMap() {
 
 // Function to handle panning
 // Not working - plus need to differentiate between draging an object vs dragging the background
+
+// Event listeners
+canvas.addEventListener('mousedown', (event) => {
+    const mouseX = event.clientX / scale;
+    const mouseY = event.clientY / scale;
+
+    // Check if mouse click is within any object
+    for (let i = 0; i < objects.length; i++) {
+        const object = objects[i];
+        if (mouseX >= object.x && mouseX <= object.x + tileSize &&
+            mouseY >= object.y && mouseY <= object.y + tileSize) {
+            isDragging = true;
+            draggedObjectIndex = i;
+            
+            // Calculate offset from the center of the object
+            const objectCenterX = object.x + tileSize / 2;
+            const objectCenterY = object.y + tileSize / 2;
+            offsetX = mouseX - objectCenterX;
+            offsetY = mouseY - objectCenterY;
+            
+            break;
+        }
+    }
+});
+
+// Function to check collision between two rectangles
+function isColliding(rect1, rect2) {
+    return rect1.x < rect2.x + tileSize &&
+           rect1.x + tileSize > rect2.x &&
+           rect1.y < rect2.y + tileSize &&
+           tileSize + rect1.y > rect2.y;
+}
+
+// Function to handle panning
 function handlePan(event) {
     if (isDragging) {
-        objects[draggedObjectIndex].x = (event.clientX / scale) - offsetX;
-        objects[draggedObjectIndex].y = (event.clientY / scale) - offsetY;
+        const mouseX = event.clientX / scale;
+        const mouseY = event.clientY / scale;
+
+        // Calculate the new position of the dragged object
+        const newRect = {
+            x: mouseX - offsetX,
+            y: mouseY - offsetY
+        };
+
+        // Check collision with other objects
+        let isCollidingWithOther = false;
+        for (let i = 0; i < objects.length; i++) {
+            if (i !== draggedObjectIndex && isColliding(newRect, objects[i])) {
+                isCollidingWithOther = true;
+                break;
+            }
+        }
+
+        // Calculate the new position of the dragged object within the grid boundaries
+        const gridCenterX = canvas.width / 2 + gridX * scale;
+        const gridCenterY = canvas.height / 2 + gridY * scale;
+
+        const rotatedX = (newRect.x - gridCenterX) * Math.cos(-gridRotation) - (newRect.y - gridCenterY) * Math.sin(-gridRotation) + gridCenterX;
+        const rotatedY = (newRect.x - gridCenterX) * Math.sin(-gridRotation) + (newRect.y - gridCenterY) * Math.cos(-gridRotation) + gridCenterY;
+
+        // Calculate the distance from the center of the grid
+        const distanceX = rotatedX - gridCenterX;
+        const distanceY = rotatedY - gridCenterY;
+
+        // Calculate the maximum allowed distance from the center of the grid
+        const maxDistanceX = (numGridSquares / 2) * gridSize * scale;
+        const maxDistanceY = (numGridSquares / 2) * gridSize * scale;
+
+        // Update the position of the dragged object if no collision and within grid boundaries
+        if (!isCollidingWithOther && Math.abs(distanceX) <= maxDistanceX && Math.abs(distanceY) <= maxDistanceY) {
+            objects[draggedObjectIndex].x = newRect.x;
+            objects[draggedObjectIndex].y = newRect.y;
+        }
+
+        // Redraw the canvas
         draw();
     } else {
         const movementX = event.movementX;
@@ -83,6 +155,21 @@ function handlePan(event) {
         draw();
     }
 }
+
+
+
+
+
+
+canvas.addEventListener('mouseup', () => {
+    isDragging = false;
+});
+
+canvas.addEventListener('mousemove', handlePan);
+
+
+
+
 
 // Function to handle zooming
 function handleZoom(event) {
@@ -141,9 +228,12 @@ function draw() {
     drawGrid();
     objects.forEach((object) => {
         const image = loadedImages[object.imageIndex];
+        ctx.strokeStyle = 'red'; // Set the stroke color to red
+        ctx.strokeRect(object.x * scale, object.y * scale, tileSize * scale, tileSize * scale); // Draw a red border around the object
         ctx.drawImage(image, object.x * scale, object.y * scale, tileSize * scale, tileSize * scale);
     });
 }
+
 
 // Event listeners
 canvas.addEventListener('mousedown', (event) => {
