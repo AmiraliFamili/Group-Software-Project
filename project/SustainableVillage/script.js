@@ -24,13 +24,13 @@ function createObject(imageSrc, row, col, scale, tiles) {
     return {
         image: createImage(imageSrc),
         row: row,
-        col: row,
+        col: col,
         x: ((col + row) * tileWidth / 2) + 14,
         y: ((row - col + 29) * tileHeight / 2) -2,
         width: scale * 100,
         height: scale * 100,
         tiles: tiles,
-        isMoving: false // Added this property to track if the object is moving
+        isMoving: false
     };
 }
 
@@ -225,17 +225,29 @@ function orderObjects(objects) {
     });
 }
 
-function giveNewObject(imgSrc, row=0, col=0, scale=1, tiles=2) {
-    return;
+function giveNewObject(imgSrc, scale, tiles) {
+    let newObj = createObject(imgSrc, 0, 0, scale, tiles)
+    for (let newRow=0; newRow < 31; newRow++) {
+        for (let newCol=0; newCol < 31; newCol++) {
+            if (isWithinGrid(newRow, newCol, tiles) && !isColliding(newObj, newRow, newCol)) {
+                console.log(newRow, newCol)
+                let neObj = createObject(imgSrc, row=newRow, col=newCol, scale=scale, tiles=tiles)
+                objects.push(neObj);
+                return;
+            }
+        }
+    }
+    console.debug("No room for new object");
 }
 
-
-// Array to hold objects
 let objects = [];
 
+//Example of directly adding an object
+//objects.push(createObject('images/hut.png', row=5, col=5, scale=1, tiles=2));
+
 // Add objects
-objects.push(createObject('images/hut.png', row=0, col=0, scale=1, tiles=2));
-objects.push(createObject('images/palmtreetrp.png', row=3, col=3, scale=1, tiles=1));
+giveNewObject('images/hut.png', scale=1, tiles=2);
+giveNewObject('images/palmtreetrp.png', scale=1, tiles=1);
 
 // Initial draw
 drawScene();
