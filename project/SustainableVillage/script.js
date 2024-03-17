@@ -49,7 +49,7 @@ function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw the background
-    ctx.fillStyle = '#cfe8cf'; // Pastel green color
+    ctx.fillStyle = '#008080'; // Sea colour
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the isometric tiles
@@ -90,8 +90,10 @@ function drawIsometricTile(x, y, width, height) {
     ctx.lineTo(x + width / 2, y + height);
     ctx.lineTo(x, y + height / 2);
     ctx.closePath();
-    ctx.strokeStyle = '#000'; // Black stroke color
+    ctx.strokeStyle = '#000'; // Black stroke color make it the same as grass to make it dissapear
     ctx.stroke();
+    ctx.fillStyle = '#a1d37e'; // Grid colour
+    ctx.fill();
 }
 
 // Mouse event listener for the objects
@@ -233,13 +235,14 @@ function giveNewObject(imgSrc, scale, tiles) {
                 console.log(newRow, newCol)
                 let neObj = createObject(imgSrc, row=newRow, col=newCol, scale=scale, tiles=tiles)
                 objects.push(neObj);
-                return;
-            }
-        }
+    return;
+}
+}
     }
     console.debug("No room for new object");
 }
 
+// Array to hold objects
 let objects = [];
 
 //Example of directly adding an object
