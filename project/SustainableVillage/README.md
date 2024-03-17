@@ -1,2 +1,0 @@
-- Fixed map location
-- Sorted mouse click now click properly, was soo confusing. Was an issue with canvas and mouse outputs giving two diff coords wso you need to normalise them to get it right
