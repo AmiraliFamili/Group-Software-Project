@@ -2,13 +2,13 @@ const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 
 // Set initial parameters
-const tileWidth = 64;
-const tileHeight = tileWidth / 2; // Adjusted for 2:1 aspect ratio
+const tileWidth = 64; //The width of a single tile
+const tileHeight = tileWidth / 2; // AThe height of a single tile
 const diamondSize = 16; // Number of tiles on each side of the diamond
 
 // Calculate the number of rows and columns
-const cols = diamondSize * 2 + 1; // Twice the size of the diamond plus one for the center
-const rows = diamondSize * 2 + 1;
+const cols = diamondSize * 2 ; // Twice the size of the diamond plus one for the center
+const rows = diamondSize * 2 ;
 
 // Calculate the canvas size based on the number of rows and columns
 canvas.width = rows * tileWidth;
@@ -52,8 +52,8 @@ function drawScene() {
     // Draw the isometric tiles
     for (let col = 0; col < cols; col++) {
         for (let row = 0; row < rows; row++) {
-            const x = offsetX + (col + row - diamondSize) * tileWidth / 2;
-            const y = offsetY + (row - col + diamondSize) * tileHeight / 2;
+            const x = (col + row ) * tileWidth / 2;
+            const y = (row - col + 32) * tileHeight / 2;
             drawIsometricTile(x, y, tileWidth, tileHeight);
         }
     }
@@ -75,7 +75,9 @@ function drawScene() {
             ctx.fill();
         }
     });
-}
+}   
+
+
 
 // Draw isometric tile
 function drawIsometricTile(x, y, width, height) {
@@ -102,9 +104,12 @@ canvas.addEventListener('mousedown', function (e) {
     const rect = canvas.getBoundingClientRect();
     const mouseX = e.clientX - rect.left;
     const mouseY = e.clientY - rect.top;
+
+    // Scale mouse coordinates to match canvas resolution
+    const canvasMouseX = mouseX * (canvas.width / rect.width);
+    const canvasMouseY = mouseY * (canvas.height / rect.height);
     objects.forEach(object => {
-        console.log("object (x,y) =", object.x, object.y, "mouse (x,y) =", mouseX, mouseY);
-        if (mouseX >= object.x && mouseX <= object.x + object.width && mouseY >= object.y && mouseY <= object.y + object.height) {
+        if (canvasMouseX >= object.x && canvasMouseX <= object.x + object.width && canvasMouseY >= object.y && canvasMouseY <= object.y + object.height) {
             // Reset all other objects' moving state
             objects.forEach(otherObject => {
                 otherObject.isMoving = false;
