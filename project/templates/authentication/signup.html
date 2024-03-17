@@ -26,9 +26,11 @@
         {% endfor %}
 
         
-        <h2>SignUp
-            <img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo3">
+        <h2><img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo3">
+            SignUp
         </h2>
+        
+
 
         <form action="/signup" method="post">
             {% csrf_token %}

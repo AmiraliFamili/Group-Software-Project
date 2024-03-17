@@ -11,8 +11,8 @@
     </head>
     <body>
       <div id="app-explanation">
-        <h1>NAMEOFAPP
-            <img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo">
+        <h1><img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo">
+            SusVille
         </h1>
         <p>Welcome to our eco-friendly campus adventure!🌱 </p>
         <p>Join us in promoting sustainability, raising awareness, and sparking positive change. </p>
@@ -31,11 +31,8 @@
         </div>
         {% endfor %}
 
-        <h3>Welcome to this Login page</h3>
-
         {% if user.is_authenticated %}
-        <h3>Hello {{fname}}</h3>
-        <h4>You have successfully logged in</h4>
+        
         <button type="submit"><a href="/signout">SignOut</a></button>
         <button type="submit"><a href="/map">Interactive Map</a></button>
         {% else %}
