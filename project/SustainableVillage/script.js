@@ -179,6 +179,74 @@ document.addEventListener('keydown', function (e) {
     drawScene();
 });
 
+// Add event listener to the Create Path button
+const createPathButton = document.getElementById('createPathButton');
+createPathButton.addEventListener('click', togglePathCreation);
+
+// Boolean variable to track if path creation mode is active
+let isCreatingPath = false;
+
+// Event listener for mouse clicks on the canvas
+canvas.addEventListener('mousedown', function (e) {
+    if (isCreatingPath) {
+        // Get the coordinates of the mouse click
+        const rect = canvas.getBoundingClientRect();
+        const mouseX = e.clientX - rect.left;
+        const mouseY = e.clientY - rect.top;
+
+        // Scale mouse coordinates to match canvas resolution
+        const canvasMouseX = mouseX * (canvas.width / rect.width);
+        const canvasMouseY = mouseY * (canvas.height / rect.height);
+
+        // Calculate the row and column of the clicked tile
+        const { row, col } = findRowsColumns(canvasMouseX , canvasMouseY);
+        
+        // Change the color of the clicked tile to sandy path color
+        drawPathTile(row-2, col);
+    }
+});
+
+// Function to toggle path creation mode
+function togglePathCreation() {
+    isCreatingPath = !isCreatingPath;
+    if (isCreatingPath) {
+        createPathButton.textContent = 'Finish Path';
+    } else {
+        createPathButton.textContent = 'Create Path';
+        // Optionally, save changes made to the path
+    }
+}
+
+// Function to draw a sandy path tile at the specified row and column
+function drawPathTile(row, col) {
+    // Calculate the coordinates of the center of the tile
+    const xCenter = (col + row) * tileWidth / 2;
+    const yCenter = (row - col + 32) * tileHeight / 2;
+
+    // Calculate the coordinates of the vertices of the tile
+    const xTop = xCenter;
+    const yTop = yCenter - tileHeight / 2;
+    const xRight = xCenter + tileWidth / 2;
+    const yRight = yCenter;
+    const xBottom = xCenter;
+    const yBottom = yCenter + tileHeight / 2;
+    const xLeft = xCenter - tileWidth / 2;
+    const yLeft = yCenter;
+
+    // Draw the sandy path tile
+    ctx.beginPath();
+    ctx.moveTo(xTop, yTop);
+    ctx.lineTo(xRight, yRight);
+    ctx.lineTo(xBottom, yBottom);
+    ctx.lineTo(xLeft, yLeft);
+    ctx.closePath();
+    ctx.fillStyle = '#deb887'; // Sandy path color
+    ctx.fill();
+}
+//AAAA
+
+
+
 // Function to check if the given coordinates are within the diamond-shaped grid
 function isWithinGrid(row, col, tiles) {
     return row >= tiles-2 && row < 31 && col >= 0 && col <= 32-tiles;
