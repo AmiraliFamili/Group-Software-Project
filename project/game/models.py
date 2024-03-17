@@ -4,7 +4,8 @@ from django.db import models
 class Item(models.Model):                           # This is the Items that you will be able to place in your village. They have a name and a price associated with them (which can be $0.00-999.99)
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=5, decimal_places=2)
-
+    image = models.ImageField(upload_to='images/', null=True)
+    
     def __str__(self):
         return self.name
 
@@ -14,9 +15,9 @@ class Location(models.Model):                       # These are the locations. D
     # OR models.CharField(max_length=40) in order to store the potential code required. Will determine in Sprint 2.
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=999) # Part of the requirement for "sustainability", will provide info for the user to learn more about a location.
-
+    code = models.CharField(max_length = 6, unique=True, null=True)
     def __str__(self):
-        return f"{self.name}: ({self.latitude}, {self.longitude})"
+        return f"{self.name} ({self.code}): ({self.latitude}, {self.longitude})"
 
 class UserProfile(models.Model):  # Adopted a different method because group member did not want extension of user class
     user = models.OneToOneField(User, on_delete=models.CASCADE)     # Creates an entity-relation between a user and this model.
