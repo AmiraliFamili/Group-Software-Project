@@ -195,12 +195,12 @@ function isColliding(movingObject, newRow, newCol) {
     let movingTopCorner = [newRow - movingObject.tiles + 1, newCol + movingObject.tiles - 1];
     let movingBottomCorner = [newRow, newCol];
     let movingLeftCorner = [newRow - movingObject.tiles + 1, newCol];
-    let movingRightCorner = [newRow, newCol + movingObject.tiles];
+    let movingRightCorner = [newRow, newCol + movingObject.tiles - 1];
 
     for (const obj of objects) {
         if (obj !== movingObject) {
             let leftCorner = [obj.row - obj.tiles + 1, obj.col];
-            let rightCorner = [obj.row, obj.col + obj.tiles];
+            let rightCorner = [obj.row, obj.col + obj.tiles - 1];
 
             if ((movingLeftCorner[0] <= rightCorner[0] && movingLeftCorner[0] >= leftCorner[0] && movingLeftCorner[1] >= leftCorner[1] && movingLeftCorner[1] <= rightCorner[1]) ||
             (movingTopCorner[0] <= rightCorner[0] && movingTopCorner[0] >= leftCorner[0] && movingTopCorner[1] >= leftCorner[1] && movingTopCorner[1] <= rightCorner[1]) ||
@@ -214,24 +214,28 @@ function isColliding(movingObject, newRow, newCol) {
     return false;
 }
 
-// Function to order objects based on row and col
+// Function to order objects based on col and row
 function orderObjects(objects) {
     return objects.sort((a, b) => {
-        if (a.row === b.row) {
-            return a.col - b.col; // Sort by col if rows are equal
+        if (a.col === b.col) {
+            return a.row - b.row; // Sort by row if cols are equal
         } else {
-            return a.row - b.row; // Sort by row otherwise
+            return b.col - a.col; // Sort by col otherwise
         }
     });
 }
+
+function giveNewObject(imgSrc, row=0, col=0, scale=1, tiles=2) {
+    return;
+}
+
 
 // Array to hold objects
 let objects = [];
 
 // Add objects
-// Cant put objects with too big a size for the edge/corner of grid
-objects.push(createObject('images/hut.png', row=10, col=10, scale=1, tiles=5));
-objects.push(createObject('images/palmtreetrp.png', row=5, col=4, scale=1, tiles=3));
+objects.push(createObject('images/hut.png', row=0, col=0, scale=1, tiles=2));
+objects.push(createObject('images/palmtreetrp.png', row=3, col=3, scale=1, tiles=1));
 
 // Initial draw
 drawScene();
