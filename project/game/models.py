@@ -5,10 +5,11 @@ class Item(models.Model):                           # This is the Items that you
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True)
-    
+    tiles = models.IntegerField(default=1)
+
+
     def __str__(self):
         return self.name
-
 
 class Location(models.Model):                       # These are the locations. Depending on the approach taken these might need to store lat/long or have some kind of associated code instead.
     latitude, longitude = models.FloatField(), models.FloatField()
@@ -36,5 +37,10 @@ class UserProfile(models.Model):  # Adopted a different method because group mem
 class Inventory(models.Model):    # Exists to resolve the many-to-many relationship that exists for owned objects.
     item = models.ForeignKey(Item, on_delete=models.CASCADE)
     userprofile = models.ForeignKey(UserProfile, on_delete=models.CASCADE, related_name='inventory_items')
-    quantity = models.PositiveIntegerField()    # How many of the item the user owns.
+    position = models.JSONField(default=dict)
 
+    def set_position(self, row, cols):
+        self.position = {"row": row, "col": cols}
+
+    def get_position(self):
+        return self.position["row"], self.position["col"]

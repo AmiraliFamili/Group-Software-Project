@@ -20,7 +20,7 @@ const offsetY = (canvas.height - (cols * tileHeight)) / 2;
 
 // Function to create a new object
 // row and col from 0-31
-function createObject(imageSrc, row, col, scale, tiles) {
+function createObject(imageSrc, row, col, scale, tiles, id) {
     return {
         image: createImage(imageSrc),
         row: row,
@@ -30,7 +30,8 @@ function createObject(imageSrc, row, col, scale, tiles) {
         width: scale * 100,
         height: scale * 100,
         tiles: tiles,
-        isMoving: false
+        isMoving: false,
+        id: id
     };
 }
 
@@ -189,6 +190,27 @@ document.addEventListener('keydown', function (e) {
                     }
                     break;
             }
+            fetch('/village/updateitem/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({
+                    id: object.id,
+                    row: newRow,
+                    col: newCol
+                })
+            }).then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                return response.json();
+            }).then(json => {
+                console.log(json);
+            }).catch(e => {
+                console.log('There was a problem with the AJAX request.', e);
+            });
         }
     });
     drawScene();
@@ -248,9 +270,47 @@ function moveObject(key) {
                 object.row = newRow;
                 object.col = newCol;
                 drawScene();
+
+                fetch('/village/updateitem/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': getCookie('csrftoken')
+                    },
+                    body: JSON.stringify({
+                        id: object.id,
+                        row: newRow,
+                        col: newCol
+                    })
+                }).then(response => {
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    return response.json();
+                }).then(json => {
+                    console.log(json);
+                }).catch(e => {
+                    console.log('There was a problem with the AJAX request.', e);
+                });
             }
         }
     });
+}
+
+
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
 }
 
 // Function to check if the given coordinates are within the diamond-shaped grid
@@ -301,13 +361,13 @@ function orderObjects(objects) {
     });
 }
 
-function giveNewObject(imgSrc, scale, tiles) {
-    let newObj = createObject(imgSrc, 0, 0, scale, tiles)
+function giveNewObject(imgSrc, scale, tiles, id) {
+    let newObj = createObject(imgSrc, 0, 0, scale, tiles, id)
     for (let newRow=0; newRow < 31; newRow++) {
         for (let newCol=0; newCol < 31; newCol++) {
             if (isWithinGrid(newRow, newCol, tiles) && !isColliding(newObj, newRow, newCol)) {
                 console.log(newRow, newCol)
-                let neObj = createObject(imgSrc, row=newRow, col=newCol, scale=scale, tiles=tiles)
+                let neObj = createObject(imgSrc, row=newRow, col=newCol, scale=scale, tiles=tiles, id)
                 objects.push(neObj);
     return;
 }
@@ -321,10 +381,6 @@ let objects = [];
 
 //Example of directly adding an object
 //objects.push(createObject('images/hut.png', row=5, col=5, scale=1, tiles=2));
-
-// Add objects
-giveNewObject('images/hut.png', scale=1, tiles=2);
-giveNewObject('images/palmtreetrp.png', scale=1, tiles=1);
 
 // Initial draw
 drawScene();
