@@ -3,7 +3,7 @@ const ctx = canvas.getContext('2d');
 
 // Set initial parameters
 const tileWidth = 64; //The width of a single tile
-const tileHeight = tileWidth / 2; // AThe height of a single tile
+const tileHeight = tileWidth / 2; // The height of a single tile
 const diamondSize = 16; // Number of tiles on each side of the diamond
 
 // Calculate the number of rows and columns
@@ -111,6 +111,7 @@ canvas.addEventListener('mousedown', function (e) {
             if (object.isMoving) {
                 object.isMoving = false;
                 drawScene();
+                hideArrowKeys();
                 return;
             }
             // Object isn't already selected
@@ -123,9 +124,23 @@ canvas.addEventListener('mousedown', function (e) {
             object.isMoving = true;
             // Draw the scene after setting the moving state
             drawScene();
+            // Show arrow keys
+            showArrowKeys();
         }
     });
 });
+
+// Function to show arrow keys
+function showArrowKeys() {
+    const arrowKeys = document.getElementsByClassName('arrow-keys')[0];
+    arrowKeys.style.display = 'block';
+}
+
+// Function to hide arrow keys
+function hideArrowKeys() {
+    const arrowKeys = document.getElementsByClassName('arrow-keys')[0];
+    arrowKeys.style.display = 'none';
+}
 
 // Handle arrow key presses to move the objects
 document.addEventListener('keydown', function (e) {
@@ -179,9 +194,68 @@ document.addEventListener('keydown', function (e) {
     drawScene();
 });
 
+// Handle arrow key button clicks
+document.getElementById('arrowUp').addEventListener('click', function() {
+    moveObject('ArrowUp');
+});
+
+document.getElementById('arrowDown').addEventListener('click', function() {
+    moveObject('ArrowDown');
+});
+
+document.getElementById('arrowLeft').addEventListener('click', function() {
+    moveObject('ArrowLeft');
+});
+
+document.getElementById('arrowRight').addEventListener('click', function() {
+    moveObject('ArrowRight');
+});
+
+// Function to move the selected object based on arrow key
+function moveObject(key) {
+    objects.forEach(object => {
+        if (object.isMoving) {
+            let newRow;
+            let newCol;
+            switch (key) {
+                case 'ArrowLeft':
+                    newRow = object.row - 1;
+                    newCol = object.col;
+                    break;
+
+                case 'ArrowRight':
+                    newRow = object.row + 1;
+                    newCol = object.col;
+                    break;
+
+                case 'ArrowUp':
+                    newRow = object.row;
+                    newCol = object.col + 1;
+                    break;
+
+                case 'ArrowDown':
+                    newRow = object.row;
+                    newCol = object.col - 1;
+                    break;
+
+                default:
+                    return;
+            }
+
+            if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
+                object.x = (newCol + newRow) * tileWidth / 2 + 14;
+                object.y = (newRow - newCol + 29) * tileHeight / 2 - 2;
+                object.row = newRow;
+                object.col = newCol;
+                drawScene();
+            }
+        }
+    });
+}
+
 // Function to check if the given coordinates are within the diamond-shaped grid
 function isWithinGrid(row, col, tiles) {
-    return row >= tiles-2 && row < 31 && col >= 0 && col <= 32-tiles;
+    return row >= tiles-2 && row < 31 && col >= 0 && col <= 32
 }
 
 // Function to find the row and column of a given point
