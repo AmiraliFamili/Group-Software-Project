@@ -3,7 +3,7 @@ from django.db import models
 
 class Item(models.Model):                           # This is the Items that you will be able to place in your village. They have a name and a price associated with them (which can be $0.00-999.99)
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
+    price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True)
     tiles = models.IntegerField(default=1)
 
@@ -22,7 +22,7 @@ class Location(models.Model):                       # These are the locations. D
 
 class UserProfile(models.Model):  # Adopted a different method because group member did not want extension of user class
     user = models.OneToOneField(User, on_delete=models.CASCADE)     # Creates an entity-relation between a user and this model.
-    currency = models.DecimalField(max_digits=9, decimal_places=2)  # Currency a user owns (which can be $0.00-9999999.99)
+    currency = models.DecimalField(max_digits=9, decimal_places=2, default=0)  # Currency a user owns (which can be $0.00-9999999.99)
     inventory = models.ManyToManyField(Item, through='Inventory')   # Creates an entity-relation to Inventory to resolve a many-to-many relationship.
     unlocked_locations = models.ManyToManyField(Location)           # Allows locations to be associated with multiple users. 
 
