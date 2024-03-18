@@ -1,0 +1,46 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f8f0; 
+    color: #008000; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    background-color: #008000; 
+    color: #ffffff; 
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #006400;
+}
+
+input[type="submit"] {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    background-color: #008000; 
+    color: #ffffff; 
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: #006400;
+}
+
+.app-logo {
+    height: 25vh;
+    width: auto;
+    vertical-align: middle;
+    
+}
