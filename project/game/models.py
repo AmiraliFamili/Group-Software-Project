@@ -3,7 +3,7 @@ from django.db import models
 
 class Item(models.Model):                           # This is the Items that you will be able to place in your village. They have a name and a price associated with them (which can be $0.00-999.99)
     name = models.CharField(max_length=200)
-    price = models.DecimalField(max_digits=5, decimal_places=2)
+    price = models.DecimalField(max_digits=5, decimal_places=2, default=0)
     image = models.ImageField(upload_to='images/', null=True)
     tiles = models.IntegerField(default=1)
 
