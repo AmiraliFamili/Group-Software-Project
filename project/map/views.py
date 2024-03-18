@@ -66,4 +66,4 @@ def code_entry(request):
                 return redirect("code_entry")
     else: 
         form = CodeForm()
-        return render(request, "authentication/submit-location-code.html", {"form": form})
+        return render(request, "map/submit-location-code.html", {"form": form})
