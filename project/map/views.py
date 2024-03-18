@@ -51,15 +51,11 @@ def code_entry(request):
                 item = random.choice(Item.objects.all())
                 
                 # Check if the user already owns the item
-                inventory, created = Inventory.objects.get_or_create(item=item, userprofile=request.user.userprofile)
-                if created:
-                    inventory.quantity = 1
-                else:
-                    inventory.quantity += 1
+                inventory, created = Inventory.objects.create(item=item, userprofile=request.user.userprofile)
                 inventory.save()
 
                 # Pass the item to the template
-                return render(request, "authentication/submit-location-code.html", {"form": form, "item": item})
+                return render(request, "map/submit-location-code.html", {"form": form, "item": item})
 
             except Location.DoesNotExist:
                 messages.error(request, "Invalid code.")

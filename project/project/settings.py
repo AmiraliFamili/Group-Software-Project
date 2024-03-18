@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "map",
     "login",
     "game",
+    "village",
 ]
 
 MIDDLEWARE = [
@@ -119,7 +120,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
 # https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = "/static/"
-
 STATIC_ROOT = os.path.join(BASE_DIR, "game/static")
 
 # Default primary key field type
