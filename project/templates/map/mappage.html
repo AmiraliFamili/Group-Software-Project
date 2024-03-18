@@ -1,19 +1,24 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Map Page</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'mappage.css' %}">
 </head>
 <body>
 
-    <h1>Select Anywhere</h1>
-    <br>
-    <br>
+    <h1>Waypoints Map</h1>
 
-    <div> {{m|safe}}</div>
+    <div class="map-container"> 
+        {{m|safe}}
+    </div>
 
-    <button type="button">Check Location</button>
+    <a href="{% url 'code_entry' %}">
+        <button type="button">Enter Code</button>
+    </a>
+
     <br>
     
 </body>

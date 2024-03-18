@@ -1,0 +1,55 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #ffffff; 
+    color: #008000; 
+}
+
+#app-explanation {
+    background-color: #f0f8f0; 
+    padding: 20px;
+    border-radius: 15px;
+    margin-bottom: 20px;
+}
+
+.app-logo {
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+    
+}
+
+.alert {
+    padding: 15px;
+    margin-bottom: 20px;
+    border: 1px solid #008000; 
+    border-radius: 10px;
+    background-color: #eaf5ea; 
+}
+
+.alert button.close {
+    color: #008000; 
+}
+
+button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px; 
+    background-color: #008000; 
+    color: #ffffff; 
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+button:hover {
+    background-color: #006400;
+}
+
+a {
+    text-decoration: none;
+    color: #ffffff; 
+}
+
+a:hover {
+    text-decoration: underline; 
+}
+

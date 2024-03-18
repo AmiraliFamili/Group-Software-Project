@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -10,7 +11,7 @@
         <title>SignUp</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" type="text/css" href="{% static 'signup.css' %}">
     </head>
     <body>
 
@@ -25,7 +26,11 @@
         {% endfor %}
 
         
-        <h2>SignUp</h2>
+        <h2><img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo3">
+            SignUp
+        </h2>
+        
+
 
         <form action="/signup" method="post">
             {% csrf_token %}

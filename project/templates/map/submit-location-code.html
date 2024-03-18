@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,8 +10,11 @@
             display: none;
         }
     </style>
+    <link rel="stylesheet" type="text/css" href="{% static 'submit-location-code.css' %}">
 </head>
 <body>
+
+    <img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo">
 
     <h1>Submit Location Code</h1>
 
@@ -44,6 +48,12 @@
         <br>
         <a>New item unlocked! Find it in your inventory!</a>
     </div>
+
+    <br>
+
+    <a href="{% url 'map_index' %}">
+        <button type="button">Return to the map</button>
+    </a>
 
 </body>
 </html>

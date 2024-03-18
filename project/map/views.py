@@ -55,11 +55,11 @@ def code_entry(request):
                 inventory.save()
 
                 # Pass the item to the template
-                return render(request, "authentication/submit-location-code.html", {"form": form, "item": item})
+                return render(request, "map/submit-location-code.html", {"form": form, "item": item})
 
             except Location.DoesNotExist:
                 messages.error(request, "Invalid code.")
                 return redirect("code_entry")
     else: 
         form = CodeForm()
-        return render(request, "authentication/submit-location-code.html", {"form": form})
+        return render(request, "map/submit-location-code.html", {"form": form})

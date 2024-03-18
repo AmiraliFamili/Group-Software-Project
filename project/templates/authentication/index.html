@@ -1,48 +1,26 @@
-<<<<<<< HEAD
-<!-- index.html -->
-
+{% load static %}
 <!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Sustainable Campus App</title>
-  <link rel="stylesheet" href="styles.css">
-</head>
-<body>
-  <div id="header">
-    <a id="sign-up" href="#">Sign Up</a>
-    <a id="sign-in" href="#">Sign In</a>
-  </div>
-
-
-  <div id="app-explanation">
-    <h1>NAMEOFAPP</h1>
-    <p>Welcome to our eco-friendly campus adventure!🌱 </p>
-    <p>Join us in promoting sustainability, raising awareness, and sparking positive change. </p>
-    <p>Walk, explore, and earn tokens to build your unique village.</p>
-    <p>Engage with daily trivia, challenge friends, and make a lasting impact. Let's game for a greener world together! </p>
-    <p>Embark on a quest where every step matters! Join a community dedicated to making a difference. Your journey awaits – discover hidden gems, unlock eco-treasures, and be part of a movement. Ready to level up your campus experience? Let the green adventure begin!</p>
-    
-  </div>
-</body>
-=======
-<!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
 <html>
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Login</title>
+        <title>Sustainable Campus App</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
+        <link rel="stylesheet" type="text/css" href="{% static 'index.css' %}">
     </head>
     <body>
-
+      <div id="app-explanation">
+        <h1><img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo">
+            SusVille
+        </h1>
+        <p>Welcome to our eco-friendly campus adventure!🌱 </p>
+        <p>Join us in promoting sustainability, raising awareness, and sparking positive change. </p>
+        <p>Walk, explore, and earn tokens to build your unique village.</p>
+        <p>Engage with daily trivia, challenge friends, and make a lasting impact. Let's game for a greener world together! </p>
+        <p>Embark on a quest where every step matters! Join a community dedicated to making a difference. Your journey awaits – discover hidden gems, unlock eco-treasures, and be part of a movement. Ready to level up your campus experience? Let the green adventure begin!</p>
+        
+      </div>
 
         {% for message in messages %}
         <div class="start_alert-{{ message.tags }} alert-dismissible fade show" role="alert">
@@ -53,11 +31,8 @@
         </div>
         {% endfor %}
 
-        <h3>Welcome to this Login page</h3>
-
         {% if user.is_authenticated %}
-        <h3>Hello {{fname}}</h3>
-        <h4>You have successfully logged in</h4>
+        
         <button type="submit"><a href="/signout">SignOut</a></button>
         <button type="submit"><a href="/map">Interactive Map</a></button>
         {% else %}
@@ -66,5 +41,4 @@
         {% endif %}
         <script src="" async defer></script>
     </body>
->>>>>>> 38d2916 (added the map in it's own app)
 </html>
