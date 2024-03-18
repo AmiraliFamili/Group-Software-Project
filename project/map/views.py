@@ -51,7 +51,7 @@ def code_entry(request):
                 item = random.choice(Item.objects.all())
                 
                 # Check if the user already owns the item
-                inventory, created = Inventory.objects.create(item=item, userprofile=request.user.userprofile)
+                inventory = Inventory.objects.create(item=item, userprofile=request.user.userprofile)
                 inventory.save()
 
                 # Pass the item to the template
