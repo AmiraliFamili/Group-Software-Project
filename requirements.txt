@@ -3,3 +3,4 @@ django-allauth==0.61.1
 django-email==0.1.10
 folium==0.15.1
 geocoder==1.38.1
+pillow==10.2.0
