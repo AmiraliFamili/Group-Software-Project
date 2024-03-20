@@ -159,8 +159,11 @@ document.addEventListener('keydown', function (e) {
             let newCol;
             switch (e.key) {
                 case 'ArrowLeft':
+                    // Get new potential coordinates
                     newRow = object.row -1;
                     newCol = object.col;
+
+                    // Check if collides with grid or other objects
                     if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
                         object.x -= tileWidth / 2;
                         object.y -= tileHeight / 2;
@@ -169,8 +172,11 @@ document.addEventListener('keydown', function (e) {
                     break;
 
                 case 'ArrowRight':
+                    // Get new potential coordinates
                     newRow = object.row +1;
                     newCol = object.col;
+
+                    // Check if collides with grid or other objects
                     if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
                         object.x += tileWidth / 2;
                         object.y += tileHeight / 2;
@@ -179,8 +185,11 @@ document.addEventListener('keydown', function (e) {
                     break;
 
                 case 'ArrowUp':
+                    // Get new potential coordinates
                     newRow = object.row;
                     newCol = object.col +1;
+
+                    // Check if collides with grid or other objects
                     if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
                         object.x += tileWidth / 2;
                         object.y -= tileHeight / 2;
@@ -189,8 +198,11 @@ document.addEventListener('keydown', function (e) {
                     break;
 
                 case 'ArrowDown':
+                    // Get new potential coordinates
                     newRow = object.row;
                     newCol = object.col -1;
+
+                    // Check if collides with grid or other objects
                     if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
                         object.x -= tileWidth / 2;
                         object.y += tileHeight / 2;
@@ -198,6 +210,7 @@ document.addEventListener('keydown', function (e) {
                     }
                     break;
             }
+            // Update database
             fetch('/village/updateitem/', {
                 method: 'POST',
                 headers: {
@@ -272,11 +285,14 @@ function moveObject(key) {
                     return;
             }
 
+            // Checking if object would collide with grid boundaries or other objects
             if (isWithinGrid(newRow, newCol, object.tiles) && !isColliding(object, newRow, newCol)) {
+                // Setting new x,y coordinates and row, col
                 object.x = (newCol + newRow) * tileWidth / 2 + 14;
                 object.y = (newRow - newCol + 29) * tileHeight / 2 - 2;
                 object.row = newRow;
                 object.col = newCol;
+                //Update screen
                 drawScene();
 
                 fetch('/village/updateitem/', {
@@ -341,14 +357,22 @@ function isColliding(movingObject, newRow, newCol) {
     let movingLeftCorner = [newRow - movingObject.tiles + 1, newCol];
     let movingRightCorner = [newRow, newCol + movingObject.tiles - 1];
 
+    // Checking for collision with each existing object
     for (const obj of objects) {
         if (obj !== movingObject) {
             let leftCorner = [obj.row - obj.tiles + 1, obj.col];
             let rightCorner = [obj.row, obj.col + obj.tiles - 1];
 
+            // Checking left corner of the moving object is inside current object
             if ((movingLeftCorner[0] <= rightCorner[0] && movingLeftCorner[0] >= leftCorner[0] && movingLeftCorner[1] >= leftCorner[1] && movingLeftCorner[1] <= rightCorner[1]) ||
+
+            // Checking top corner of the moving object is inside current object
             (movingTopCorner[0] <= rightCorner[0] && movingTopCorner[0] >= leftCorner[0] && movingTopCorner[1] >= leftCorner[1] && movingTopCorner[1] <= rightCorner[1]) ||
+
+            // Checking bottom corner of the moving object is inside current object
             (movingBottomCorner[0] <= rightCorner[0] && movingBottomCorner[0] >= leftCorner[0] && movingBottomCorner[1] >= leftCorner[1] && movingBottomCorner[1] <= rightCorner[1]) ||
+
+            // Checking right corner of the moving object is inside current object
             (movingRightCorner[0] <= rightCorner[0] && movingRightCorner[0] >= leftCorner[0] && movingRightCorner[1] >= leftCorner[1] && movingRightCorner[1] <= rightCorner[1]))
              {
                 return true;
@@ -369,6 +393,7 @@ function orderObjects(objects) {
     });
 }
 
+// Gives user object, places it next available position
 function giveNewObject(imgSrc, scale, tiles, id) {
     let newObj = createObject(imgSrc, 0, 0, scale, tiles, id)
     for (let newRow=0; newRow < 31; newRow++) {
