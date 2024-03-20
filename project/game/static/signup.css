@@ -1,60 +1,48 @@
-body {
-    font-family: Arial, sans-serif;
-    background-color: #ffffff; 
-    color: #008000; 
+/* General styles */
+.blue-background {
+    background-color: #118A9D; /* Blue background color */
+    padding: 20px;
+    min-height: 100vh; /* Ensure background covers entire viewport */
 }
 
-.app-logo3 {
-    height: 50px;
-    width: 50px;
-    vertical-align: middle;
-}
-
-.alert {
-    padding: 15px;
-    margin-bottom: 20px;
-    border: 1px solid #008000; 
-    border-radius: 10px; 
-    background-color: #eaf5ea; 
-}
-
-.alert button.close {
-    color: #008000; 
+.container {
+    background-color: #87C159; /* Green background for form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
 }
 
 h2 {
-    color: #008000;
+    text-align: center;
+    color: #333; /* Dark text color */
 }
 
-form {
-    background-color: #f0f8f0;
-    padding: 20px;
-    border-radius: 15px; 
+.app-logo {
+    width: 50px;
+    margin-right: 10px; /* Add some space between logo and text */
 }
 
-label {
-    display: block;
-    margin-bottom: 10px;
+.app-name {
+    font-size: 24px;
+    margin-top: 0;
+    color: #333; /* Dark text color */
 }
 
-input[type="text"],
-input[type="password"] {
-    width: auto;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #008000; 
-    border-radius: 5px;
+.form-group {
+    margin-bottom: 20px;
 }
 
-button {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px; 
-    background-color: #008000;
-    color: #ffffff;
-    cursor: pointer;
+/* Button styles */
+.btn-signup {
+    background-color: #118A9D; /* Blue background color */
+    border-color: #118A9D; /* Same color as background */
+    border-radius: 20px; /* Rounded edges */
+    width: 100%; /* Span the width of the form */
 }
 
-button:hover {
-    background-color: #006400; 
+.btn-signup:hover,
+.btn-signup:focus {
+    background-color: #00808071; /* Darker shade on hover/focus */
+    border-color: #00808071; /* Darker shade for border */
 }
+
