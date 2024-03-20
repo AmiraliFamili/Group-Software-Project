@@ -45,7 +45,7 @@
         var position = {{ inventory.position|safe }};
         var tiles = {{ inventory.item.tiles }};
         console.log("{{ inventory.item.image.url }}");
-        if (position.row && position.col) {
+        if (position.row != null && position.col != null) {
             objects.push(createObject("{{ inventory.item.image.url }}", row=position.row, col=position.col, scale=1, tiles=tiles, id={{ inventory.id }}));
         } else {
             giveNewObject("{{ inventory.item.image.url }}", scale=1, tiles=tiles, id={{inventory.id}});

@@ -18,3 +18,4 @@ venv/
 .DS_Store
 .AppleDouble
 .LSOverride
+project/db.sqlite3

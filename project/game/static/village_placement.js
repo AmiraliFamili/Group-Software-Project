@@ -50,7 +50,7 @@ function drawScene() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     // Draw the background
-    ctx.fillStyle = '#008080'; // Sea colour
+    ctx.fillStyle = '#118A9D'; // Sea colour
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     // Draw the isometric tiles
@@ -81,7 +81,7 @@ function drawScene() {
             ctx.fill();
         }
     });
-}
+}   
 
 // Draw isometric tile
 function drawIsometricTile(x, y, width, height) {
@@ -91,9 +91,17 @@ function drawIsometricTile(x, y, width, height) {
     ctx.lineTo(x + width / 2, y + height);
     ctx.lineTo(x, y + height / 2);
     ctx.closePath();
-    ctx.strokeStyle = '#000'; // Black stroke color make it the same as grass to make it dissapear
+    ctx.strokeStyle = "rgba(130,40,0,0.2)";
     ctx.stroke();
-    ctx.fillStyle = '#a1d37e'; // Grid colour
+
+    let {row, col} = findRowsColumns(x, y)
+    if (row <=4 || row >=33 || col <=1 || col >=30){
+        ctx.fillStyle = '#EEC190'; // Beach Colour
+    }
+    else
+    {
+        ctx.fillStyle = '#87C159'; // Grass Colour
+    }
     ctx.fill();
 }
 
@@ -198,8 +206,8 @@ document.addEventListener('keydown', function (e) {
                 },
                 body: JSON.stringify({
                     id: object.id,
-                    row: newRow,
-                    col: newCol
+                    row: object.row,
+                    col: object.col
                 })
             }).then(response => {
                 if (!response.ok) {
@@ -279,8 +287,8 @@ function moveObject(key) {
                     },
                     body: JSON.stringify({
                         id: object.id,
-                        row: newRow,
-                        col: newCol
+                        row: object.row,
+                        col: object.col
                     })
                 }).then(response => {
                     if (!response.ok) {
@@ -315,7 +323,7 @@ function getCookie(name) {
 
 // Function to check if the given coordinates are within the diamond-shaped grid
 function isWithinGrid(row, col, tiles) {
-    return row >= tiles-2 && row < 31 && col >= 0 && col <= 32
+    return row >= tiles-2 && row < 31 && col >= 0 && col <= 32-tiles;
 }
 
 // Function to find the row and column of a given point
@@ -380,7 +388,7 @@ function giveNewObject(imgSrc, scale, tiles, id) {
 let objects = [];
 
 //Example of directly adding an object
-//objects.push(createObject('images/hut.png', row=5, col=5, scale=1, tiles=2));
+//objects.push(createObject('../media/images/hut.png', row=15, col=13, scale=1, tiles=2));
 
 // Initial draw
 drawScene();
