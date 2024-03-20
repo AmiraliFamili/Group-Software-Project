@@ -17,6 +17,8 @@ class Location(models.Model):                       # These are the locations. D
     name = models.CharField(max_length=200)
     description = models.CharField(max_length=999) # Part of the requirement for "sustainability", will provide info for the user to learn more about a location.
     code = models.CharField(max_length = 6, unique=True, null=True)
+    type = models.CharField(max_length = 5, default="NONE")
+
     def __str__(self):
         return f"{self.name} ({self.code}): ({self.latitude}, {self.longitude})"
 
