@@ -5,9 +5,27 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Map Page</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="{% static 'mappage.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
 </head>
 <body>
+    {% if user.is_authenticated %}
+    <ul class="nav nav-pills">
+      <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
+        <div class="dropdown-menu">
+          <a class="dropdown-item" href="/" onclick="openTab('map')">Home</a>
+          <a class="dropdown-item nav-link active" href="/map" onclick="openTab('map')">Interactive Map</a>
+          <a class="dropdown-item" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
+          <a class="dropdown-item" href="/village" onclick="openTab('village')">Sustainable Village</a>
+          <a class="dropdown-item" href="#">Leaderboard</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
+        </div>
+      </li>
+    </ul>
+    {% endif %}
 
     <h1>Waypoints Map</h1>
 
@@ -20,6 +38,14 @@
     </a>
 
     <br>
-    
+<!-- Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+document.getElementById('navbar-toggler').addEventListener('click', function() {
+    document.getElementById('dropdown-menu').classList.toggle('show');
+});
+</script>
 </body>
 </html>

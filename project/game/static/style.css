@@ -1,0 +1,59 @@
+/* General styles */
+.blue-background {
+    background-color: #118A9D; /* Blue background color */
+    padding: 20px;
+    min-height: 100vh; /* Ensure background covers entire viewport */
+}
+
+.container {
+    background-color: #87C159; /* Green background for form */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+}
+
+h2 {
+    text-align: center;
+    color: #333; /* Dark text color */
+}
+
+.app-logo {
+    width: 50px;
+    margin-right: 10px; /* Add some space between logo and text */
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Button styles */
+.btn-primary {
+    background-color: #118A9D; /* Blue background color */
+    border-color: #118A9D; /* Same color as background */
+    border-radius: 20px; /* Rounded edges */
+    width: 100%; /* Span the width of the form */
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #00808071; /* Darker shade on hover/focus */
+    border-color: #00808071; /* Darker shade for border */
+}
+
+@media (min-width: 768px) {
+    .btn-primary {
+        width: auto; /* Reset width for side-by-side arrangement */
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
