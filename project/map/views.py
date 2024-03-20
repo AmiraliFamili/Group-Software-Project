@@ -8,7 +8,12 @@ import geocoder
 import random
 
 
-colors = ["red", "green", "black", "blue"]
+colors = {
+    "NONE" : "black",
+    "ECO" : "green",
+    "WATER" : "blue",
+    "POINT" : "red"
+}
 
 def map(request):
    location = geocoder.google("Exeter")
@@ -21,8 +26,8 @@ def map(request):
    for location in locations:
       folium.Marker(
          [location.latitude, location.longitude],
-         popup = location.name,
-         icon = folium.Icon(color=random.choice(colors))
+         popup = folium.Popup(f"<b>{location.name}</b> <br> <i>{location.description}</i>", max_width=500),
+         icon = folium.Icon(colors[location.type])
       ).add_to(m)
 
    
