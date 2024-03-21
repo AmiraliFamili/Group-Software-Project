@@ -210,7 +210,7 @@ document.addEventListener('keydown', function (e) {
                     }
                     break;
             }
-            // Update database
+            // Creates a post request to the website to save the current arrangement of objects
             fetch('/village/updateitem/', {
                 method: 'POST',
                 headers: {
@@ -295,6 +295,7 @@ function moveObject(key) {
                 //Update screen
                 drawScene();
 
+                // Creates a post request to the website to save the current arrangement of objects
                 fetch('/village/updateitem/', {
                     method: 'POST',
                     headers: {
@@ -321,7 +322,7 @@ function moveObject(key) {
     });
 }
 
-
+// Django's XSS-Injection prevention system requires cookie headers to be tracked. This code is just boilerplate.
 function getCookie(name) {
     let cookieValue = null;
     if (document.cookie && document.cookie !== '') {
