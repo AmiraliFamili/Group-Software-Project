@@ -1,5 +1,5 @@
 """ models.py
-Sebastian Root - wrote pytohn code"""
+Sebastian Root - wrote python code"""
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -8,7 +8,6 @@ class Item(models.Model):                           # This is the Items that you
     price = models.DecimalField(max_digits=5, decimal_places=2)
     image = models.ImageField(upload_to='images/', null=True)
     tiles = models.IntegerField(default=1)
-
 
     def __str__(self):
         return self.name

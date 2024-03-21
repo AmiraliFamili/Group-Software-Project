@@ -1,6 +1,7 @@
 """ views.py
-Amirali Famili - wrote python code"""
-from django.http import HttpResponse
+Amirali Famili - wrote python code
+Sebastian Root - fixed code
+"""
 from django.shortcuts import redirect, render
 from django.contrib import messages
 from django.contrib.auth import get_user_model
@@ -13,34 +14,32 @@ def signup(request):
     User = get_user_model()
     if request.method == "POST":
         # Get form data
-        username = request.POST['username']
-        fname = request.POST['fname']
-        lname = request.POST['lname']
-        email = request.POST['email']
-        password = request.POST['pass']
-        confpassword = request.POST['confpass']
+        username = request.POST["username"]
+        fname = request.POST["fname"]
+        lname = request.POST["lname"]
+        email = request.POST["email"]
+        password = request.POST["pass"]
+        confpassword = request.POST["confpass"]
         
         if User.objects.filter(username=username): 
-            messages.error(request, "Username already exists! Try Another One")
-            return redirect("home")
+            messages.error(request, "Username already exists!")
+            return redirect("/signup")
         
-        """
-        Authenticate user : 
-        
-         if User.objects.filter(email=email):
-            messages.error(request, "Email already registered !")
-            return redirect('home')
+        if User.objects.filter(email=email):
+            messages.error(request, "Email already registered!")
+            return redirect('/signup')
         
         if len(username) > 20 :
             messages.error(request, "Username must be under 20 characters")
+            return redirect("/signup")
+        
         if password != confpassword :
-            messages.error(request, "Passwords didn't match")
+            messages.error(request, "Passwords dont't match")
+            return redirect("/signup")
         
         if not username.isalnum():
-            messages.error(request, "Username must contain characters or numbers")
-            return redirect("home")
-
-        """
+            messages.error(request, "Username must contain only alphanumeric characters")
+            return redirect("/signup")
 
         # Create user account
         account = User.objects.create_user(username, email, password)
@@ -49,7 +48,7 @@ def signup(request):
         account.save()
         
         # Display success message and redirect to home page
-        messages.success(request, "Your Account Is Now Created. Please sign in to continue.")
+        messages.success(request, "Your account has been created. Please sign in to continue.")
         return redirect('home')
     
     return render(request, "authentication/signup.html")
@@ -76,5 +75,5 @@ def signin(request):
 
 def signout(request): 
     logout(request) 
-    messages.success(request, "You have been Logged Out !!!")
+    messages.success(request, "You have been logged out.")
     return redirect('home')
