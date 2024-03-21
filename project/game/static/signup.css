@@ -1,31 +1,33 @@
-/* General styles */
+/* navbar.css
+Jean Mady - wrote css
+*/
 .blue-background {
-    background-color: #118A9D; /* Blue background color */
+    background-color: #118A9D; 
     padding: 20px;
-    min-height: 100vh; /* Ensure background covers entire viewport */
+    min-height: 100vh; 
 }
 
 .container {
-    background-color: #87C159; /* Green background for form */
+    background-color: #87C159; 
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
 }
 
 h2 {
     text-align: center;
-    color: #333; /* Dark text color */
+    color: #333; 
 }
 
 .app-logo {
     width: 50px;
-    margin-right: 10px; /* Add some space between logo and text */
+    margin-right: 10px; 
 }
 
 .app-name {
     font-size: 24px;
     margin-top: 0;
-    color: #333; /* Dark text color */
+    color: #333; 
 }
 
 .form-group {
@@ -34,15 +36,15 @@ h2 {
 
 /* Button styles */
 .btn-signup {
-    background-color: #118A9D; /* Blue background color */
-    border-color: #118A9D; /* Same color as background */
-    border-radius: 20px; /* Rounded edges */
+    background-color: #118A9D; 
+    border-color: #118A9D; 
+    border-radius: 20px; 
     width: 100%; /* Span the width of the form */
 }
 
 .btn-signup:hover,
 .btn-signup:focus {
-    background-color: #00808071; /* Darker shade on hover/focus */
-    border-color: #00808071; /* Darker shade for border */
+    background-color: #00808071; 
+    border-color: #00808071; 
 }
 

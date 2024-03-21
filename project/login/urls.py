@@ -1,3 +1,7 @@
+""" urls.py
+Amirali Famili - wrote python code
+Sebastian Root - reformatted file
+"""
 from django.contrib import admin
 from django.urls import path, include
 from . import views;

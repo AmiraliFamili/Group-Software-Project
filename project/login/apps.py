@@ -1,3 +1,5 @@
+""" apps.py
+Sebastian Root - Generated code"""
 from django.apps import AppConfig
 
 

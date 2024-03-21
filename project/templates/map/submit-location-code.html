@@ -1,4 +1,10 @@
-{% load static %}
+<!-- submit-location-code.html
+George Sharpe - wrote html
+Sebastian Root - Linked to backend
+Jean Mady - Added Navbar functionality + Bootstrap
+-->
+{% load static %} <!-- Load static files -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,27 +12,28 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Submit Location Code</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="{% static 'submit-location-code.css' %}">
-    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'submit-location-code.css' %}"> <!-- Load custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'navbar.css' %}"> <!-- Load custom CSS for navbar -->
 </head>
 <body>
     {% if user.is_authenticated %}
-        <ul class="nav nav-pills">
-          <li class="nav-item dropdown">
+    <!-- Navbar section for authenticated users -->
+    <ul class="nav nav-pills">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
             <div class="dropdown-menu">
-            <a class="dropdown-item" href="/" onclick="openTab('map')">Home</a>
-              <a class="dropdown-item" href="/map" onclick="openTab('map')">Interactive Map</a>
-              <a class="dropdown-item nav-link active" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
-              <a class="dropdown-item" href="/village" onclick="openTab('village')">Sustainable Village</a>
-              <a class="dropdown-item" href="#">Leaderboard</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
+                <a class="dropdown-item" href="/" onclick="openTab('map')">Home</a>
+                <a class="dropdown-item" href="/map" onclick="openTab('map')">Interactive Map</a>
+                <a class="dropdown-item nav-link active" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
+                <a class="dropdown-item" href="/village" onclick="openTab('village')">Sustainable Village</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
             </div>
-          </li>
-        </ul>
+        </li>
+    </ul>
     {% endif %}
     <div class="container">
+        <!-- Submission form -->
         <h2 class="text-center mt-5 mb-4">
             <img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo mr-2">
             SusVille: Exeter - Submit Location Code
@@ -40,7 +47,7 @@
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
-
+        <!-- Display messages -->
         {% if messages %}
         <div class="messages">
             {% for message in messages %}
@@ -51,6 +58,7 @@
         </div>
         {% endif %}
 
+        <!-- Display item if available -->
         {% if item %}
         <p>{{ item.name }}</p>
         <img src="{{ item.image.url }}" alt="{{ item.name }}" width="20%" height="20%">
@@ -58,19 +66,22 @@
 
         <br>
 
+        <!-- Return to interactive map button -->
         <a href="{% url 'map_index' %}">
             <button type="button" class="btn btn-secondary">Return to the Interactive Map</button>
         </a>
     </div>
 
-<!-- Bootstrap JS -->
-<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-<script>
-document.getElementById('navbar-toggler').addEventListener('click', function() {
-    document.getElementById('dropdown-menu').classList.toggle('show');
-});
-</script>
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        // Toggle dropdown menu when navbar-toggler is clicked
+        document.getElementById('navbar-toggler').addEventListener('click', function() {
+            document.getElementById('dropdown-menu').classList.toggle('show');
+        });
+    </script>
 </body>
 </html>
+

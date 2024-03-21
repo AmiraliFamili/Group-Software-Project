@@ -1,3 +1,5 @@
+""" urls.py
+Sebastian Root - wrote python code"""
 from django.urls import path
 from . import views
 

@@ -1,3 +1,8 @@
+<!-- village.html
+  Jean Mady - wrote html + css + Bootstrap
+  Udit Tripathi - Scaled to make compatible with mobile screens + Bootstrap
+  Sebastian Root - Linked to the backend
+-->
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
@@ -5,7 +10,9 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Village</title>
+  <!-- Bootstrap CSS -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <!-- Custom CSS -->
   <link rel="stylesheet" href="{% static 'navbar.css' %}">
 
   <style>
@@ -61,7 +68,7 @@
 </head>
 
 <body>
-
+<!-- Navbar -->
 {% if user.is_authenticated %}
 <div class="navbar">
   <ul class="nav nav-pills">
@@ -73,7 +80,6 @@
         <a class="dropdown-item" href="/map" onclick="openTab('map')">Interactive Map</a>
         <a class="dropdown-item" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
         <a class="dropdown-item nav-link active" href="/village" onclick="openTab('village')">Sustainable Village</a>
-        <a class="dropdown-item" href="#">Leaderboard</a>
         <div class="dropdown-divider"></div>
         <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
       </div>
@@ -82,8 +88,10 @@
 </div>
 {% endif %}
 
+<!-- Canvas for displaying objects -->
 <canvas id="myCanvas"></canvas>
 
+<!-- Arrow keys for navigation -->
 <div class="arrow-keys">
   <button id="arrowUp">↑</button>
   <button id="arrowDown">↓</button>
@@ -91,29 +99,37 @@
   <button id="arrowRight">→</button>
 </div>
 
+<!-- Load static files and JavaScript -->
 {% load static %}
 <script src="{% static 'village_placement.js' %}"></script>
 
+<!-- Initialize inventory items -->
 <script>
   {% for inventory in inventory_items %}
   var position = {{ inventory.position|safe }};
   var tiles = {{ inventory.item.tiles }};
   console.log("{{ inventory.item.image.url }}");
   if (position.row != null && position.col != null) {
+    // If position is defined, create object at specified position
     objects.push(createObject("{{ inventory.item.image.url }}", row=position.row, col=position.col, scale=1, tiles=tiles, id={{ inventory.id }}));
   } else {
+    // If position is not defined, create new object
     giveNewObject("{{ inventory.item.image.url }}", scale=1, tiles=tiles, id={{inventory.id}});
   }
   {% endfor %}
 </script>
 
+<!-- JavaScript dependencies -->
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+<!-- Toggle dropdown menu -->
 <script>
   document.getElementById('navbar-toggler').addEventListener('click', function() {
     document.getElementById('dropdown-menu').classList.toggle('show');
   });
 </script>
+
 </body>
 </html>

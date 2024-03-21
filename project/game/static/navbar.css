@@ -1,18 +1,20 @@
-/* Custom styling for the navbar */
+/* navbar.css
+Jean Mady - wrote css
+*/
 .nav-pills .nav-link {
-    background-color: #87C159; /* Green background color */
-    border-radius: 20px; /* Rounded corners */
-    padding: 10px 20px; /* Padding */
-    margin-right: 10px; /* Margin between items */
-    color: white; /* Text color */
+    background-color: #87C159; 
+    border-radius: 20px; 
+    padding: 10px 20px; 
+    margin-right: 10px; 
+    color: white; 
 }
 
 .nav-pills .dropdown-menu {
-    border-radius: 20px; /* Rounded corners */
-    background-color: #87C159; /* Green background color */
-    padding: 10px 0; /* Padding */
+    border-radius: 20px; 
+    background-color: #87C159;
+    padding: 10px 0; 
 }
 
 .dropdown-item {
-    color: white !important; /* Text color for dropdown items */
+    color: white !important; 
 }

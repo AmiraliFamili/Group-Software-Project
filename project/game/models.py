@@ -1,3 +1,5 @@
+""" models.py
+Sebastian Root - wrote pytohn code"""
 from django.contrib.auth.models import User
 from django.db import models
 

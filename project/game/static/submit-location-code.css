@@ -1,13 +1,17 @@
+/* navbar.css
+Jean Mady - wrote css
+*/
+
 body {
-    background-color: #118A9D; /* Blue background color */
-    color: white; /* White text color */
+    background-color: #118A9D; 
+    color: white;
 }
 
 .container {
-    background-color: #87C159; /* Green container background color */
-    padding: 20px; /* Padding */
-    border-radius: 10px; /* Rounded corners */
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* Soft shadow */
+    background-color: #87C159; 
+    padding: 20px; 
+    border-radius: 10px; 
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); 
     margin: 50px auto; /* Center container vertically and horizontally */
     max-width: 600px; /* Maximum width of the container */
 }
@@ -18,7 +22,7 @@ body {
 
 .app-logo {
     width: 50px;
-    margin-right: 10px; /* Add some space between logo and text */
+    margin-right: 10px; 
 }
 
 input[type="text"], input[type="submit"] {

@@ -1,3 +1,9 @@
+/* village_placements.js
+George Sharpe - Z-Index for objects, Overhauled objects and related support functions, Collisions with grid and other objects, improve object movement, JS code, improved styling of map
+Jean Mady - Created the Grid system, Initial styling of map, support functions for objects, event listeners, Added on screen keys for mobile support
+Sebastian Root - Saving and placing objects from previous sessions
+*/
+
 const canvas = document.getElementById('myCanvas');
 const ctx = canvas.getContext('2d');
 

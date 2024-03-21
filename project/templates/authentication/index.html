@@ -1,4 +1,11 @@
-{% load static %}
+<!-- index.html
+Udit Tripathi - wrote html
+Amirali Famili - wrote html
+Jean Mady - Improved html + added navbar + Bootstrap
+Sebastian Root - Handling HTTP methods
+-->
+{% load static %} <!-- Load static files -->
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,11 +14,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{% static 'style.css' %}">
-    <link rel="stylesheet" href="{% static 'navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'style.css' %}"> <!-- Load custom CSS -->
+    <link rel="stylesheet" href="{% static 'navbar.css' %}"> <!-- Load custom CSS for navbar -->
 </head>
 <body>
 {% for message in messages %}
+<!-- Display messages -->
 <div class="alert alert-{{ message.tags }} alert-dismissible fade show" role="alert">
     <strong>Message:</strong> {{ message }}
     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -22,24 +30,25 @@
 
 <div class="blue-background">
   {% if user.is_authenticated %}
-        <ul class="nav nav-pills">
-          <li class="nav-item dropdown">
+    <!-- Navbar section for authenticated users -->
+    <ul class="nav nav-pills">
+        <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Menu</a>
             <div class="dropdown-menu">
-              <a class="dropdown-item nav-link active" href="/" onclick="openTab('map')">Home</a>
-              <a class="dropdown-item" href="/map" onclick="openTab('map')">Interactive Map</a>
-              <a class="dropdown-item" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
-              <a class="dropdown-item" href="/village" onclick="openTab('village')">Sustainable Village</a>
-              <a class="dropdown-item" href="#">Leaderboard</a>
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
+                <a class="dropdown-item nav-link active" href="/" onclick="openTab('map')">Home</a>
+                <a class="dropdown-item" href="/map" onclick="openTab('map')">Interactive Map</a>
+                <a class="dropdown-item" href="/map/code" onclick="openTab('map/code')">Submit location code</a>
+                <a class="dropdown-item" href="/village" onclick="openTab('village')">Sustainable Village</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="/signout" onclick="openTab('logout')">Log Out</a>
             </div>
-          </li>
-        </ul>
-    {% endif %}
+        </li>
+    </ul>
+  {% endif %}
   <div class="container">
       <div class="row justify-content-center">
           <div class="col-md-6">
+              <!-- App description -->
               <h2 class="text-center mt-5 mb-4">
                 <img src="{% static 'palmtree.png' %}" alt="App Logo" class="app-logo">
                 SusVille: Exeter
@@ -50,10 +59,12 @@
               <p>Engage with your environment and make a lasting impact. Let's game for a greener world together! </p>
               <p>Embark on a quest where every step matters! Join a community dedicated to making a difference. Your journey awaits – discover hidden gems, unlock green buildings, and be part of a movement. Ready to level up your campus experience? Let the green adventure begin!</p>
               {% if user.is_authenticated %}
+              <!-- Display user information if authenticated -->
               <div class="text-center"></div>
                 <p>Welcome to SusVille: Exeter  -  {{user.username}}</p>
               </div>
               {% else %}
+              <!-- Display sign-up and sign-in buttons if not authenticated -->
               <div class="text-center">
                 <a href="/signup" class="btn btn-primary mr-md-2 mb-2 mb-md-0">Sign Up</a>
                 <a href="/signin" class="btn btn-primary">Sign In</a>
@@ -69,10 +80,10 @@
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <script>
+// Toggle dropdown menu when navbar-toggler is clicked
 document.getElementById('navbar-toggler').addEventListener('click', function() {
     document.getElementById('dropdown-menu').classList.toggle('show');
 });
 </script>
 </body>
 </html>
-

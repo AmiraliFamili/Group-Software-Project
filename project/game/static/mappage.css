@@ -1,6 +1,10 @@
+/* mappage.css
+Udit Tripathi - wrote css
+*/
+
 body {
     font-family: Arial, sans-serif;
-    background-color: #118A9D; /* Blue background color */
+    background-color: #118A9D; 
     color: #87C159;
     display: flex;
     flex-direction: column;
@@ -20,7 +24,7 @@ body {
     border-radius: 10px;
     padding: 20px; 
     box-sizing: border-box;
-    background-color: #87C159; /* Fill the gap with the same green color */
+    background-color: #87C159; 
 }
 
 button {
