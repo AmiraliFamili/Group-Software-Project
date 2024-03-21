@@ -2,6 +2,7 @@
 - Open a CMD in this current directory.
 - We must install the dependencies for this project.
 > python -m pip install -r requirements.txt
+> 
 > cd ./project
 
 - You can run tests as follows:
