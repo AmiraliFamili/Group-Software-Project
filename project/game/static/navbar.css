@@ -6,7 +6,7 @@ Jean Mady - wrote css
     border-radius: 20px; 
     padding: 10px 20px; 
     margin-right: 10px; 
-    color: white; 
+    color: black; 
 }
 
 .nav-pills .dropdown-menu {
@@ -16,5 +16,5 @@ Jean Mady - wrote css
 }
 
 .dropdown-item {
-    color: white !important; 
+    color: black !important; 
 }
